@@ -15,7 +15,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "Unlicense",
   "devDependencies": {
     "@types/cors": "^2.8.9",
     "@types/debug": "^4.1.5",
