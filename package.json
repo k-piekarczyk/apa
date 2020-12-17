@@ -8,7 +8,10 @@
     "start:dev:single": "cross-env DEBUG=* ts-node ./src/server.ts",
     "build": "rimraf ./dist && tsc",
     "prestart": "npm run build",
-    "start": "node"
+    "start": "node",
+    "docker:up": "docker-compose up -d",
+    "docker:stop": "docker-compose stop",
+    "docker:down": "docker-compose down"
   },
   "keywords": [],
   "author": "",

@@ -1,9 +1,10 @@
 import app from './app';
-import http from 'http';
+import * as http from 'http';
 import debug from 'debug';
+import { env } from 'process'
 
 const debugLog: debug.IDebugger = debug('server');
-const port: number = 3000;
+const port: number = Number.parseInt(env.PORT || '3000');
 
 const server: http.Server = http.createServer(app);
 
