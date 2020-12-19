@@ -1,4 +1,5 @@
-import {Entity, PrimaryColumn, Column, ManyToMany, JoinTable} from 'typeorm';
+import {Entity, PrimaryColumn, Column, ManyToMany, JoinTable, OneToMany} from 'typeorm';
+import { Army } from './Army';
 import { Paint } from './Paint';
 
 @Entity()
@@ -16,4 +17,7 @@ export class User {
     @ManyToMany(type => Paint, paint => paint.owners)
     @JoinTable()
     paints!: Paint[];
+
+    @OneToMany(type => Army, army => army.user)
+    armies!: Army[];
 }
