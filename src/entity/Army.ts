@@ -1,22 +1,22 @@
 import { type } from 'os';
-import {Entity, PrimaryColumn, Column, ManyToOne, OneToMany} from 'typeorm';
+import { Entity, PrimaryColumn, Column, ManyToOne, OneToMany } from 'typeorm';
 import { Force } from './Force';
 import { UnitVariant } from './UnitVariant';
-import { User } from './user';
+import { User } from './User';
 
 @Entity()
 export class Army {
 
-    @PrimaryColumn({length: 256})
+    @PrimaryColumn({ length: 256 })
     name!: string;
 
     @ManyToOne(type => User, user => user.armies)
     user!: User;
 
-    @Column({length: 254, unique: true})
+    @Column({ length: 254, unique: true })
     email!: string
 
-    @Column({length: 60})
+    @Column({ length: 60 })
     passwordHash!: string
 
     @ManyToOne(type => Force, force => force.armies)

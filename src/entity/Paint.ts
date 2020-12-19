@@ -1,5 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToMany} from "typeorm";
-import {User} from './User';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToMany } from "typeorm";
+import { User } from './User';
 
 export enum PaintType {
     Base = 'base',
@@ -14,7 +14,7 @@ export class Paint {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column({type: 'enum', enum: PaintType, default: PaintType.Base})
+    @Column({ type: 'enum', enum: PaintType, default: PaintType.Base })
     type!: PaintType;
 
     @ManyToMany(type => User, user => user.paints)
