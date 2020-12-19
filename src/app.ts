@@ -1,3 +1,4 @@
+import "reflect-metadata"; // Needed for typeORM to work properly
 import express from 'express';
 
 import * as bodyparser from 'body-parser';
