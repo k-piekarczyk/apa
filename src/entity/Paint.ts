@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToMany } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, OneToMany } from "typeorm";
+import { PaintSchemePart } from "./PaintSchemePart";
 import { User } from './User';
 
 export enum PaintType {
@@ -20,5 +21,6 @@ export class Paint {
     @ManyToMany(type => User, user => user.paints)
     owners!: Paint[];
 
-    // TODO: add relation with PaintScheme
+    @OneToMany(type => PaintSchemePart, paintSchemePart => paintSchemePart.paint)
+    paintSchemeParts!: PaintSchemePart[];
 }
