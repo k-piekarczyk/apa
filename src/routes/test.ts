@@ -11,7 +11,7 @@ export class TestRouter extends CommonRouter {
             .get('/', this.test);
     }
 
-    test(req: express.Request, res: express.Response): void {
+    async test(req: express.Request, res: express.Response): Promise<void> {
         res.status(500).send('Is not fine :c');
     }
 }
