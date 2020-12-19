@@ -1,4 +1,5 @@
-import {Entity, PrimaryColumn, Column} from 'typeorm';
+import {Entity, PrimaryColumn, Column, ManyToMany, JoinTable} from 'typeorm';
+import { Paint } from './Paint';
 
 @Entity()
 export class User {
@@ -7,8 +8,12 @@ export class User {
     username!: string;
 
     @Column({length: 254, unique: true})
-    email!: string
+    email!: string;
 
     @Column({length: 60})
-    passwordHash!: string
+    passwordHash!: string;
+
+    @ManyToMany(type => Paint, paint => paint.owners)
+    @JoinTable()
+    paints!: Paint[];
 }
