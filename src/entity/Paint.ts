@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn, ManyToMany} from "typeorm";
-import { User } from "./User";
+import {User} from './User';
 
 export enum PaintType {
     Base = 'base',
