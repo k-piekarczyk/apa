@@ -13,7 +13,7 @@ export class UnitVariant {
     army!: Army;
 
     @ManyToOne(() => Unit)
-    @JoinColumn([{name: "unit_id", referencedColumnName: "id"}])
+    @JoinColumn([{ name: "unit_id", referencedColumnName: "id" }])
     unit!: Unit;
 
     @Column()
@@ -23,5 +23,5 @@ export class UnitVariant {
     pointValue!: number;
 
     @OneToMany(() => WargearVariant, wargearVariant => wargearVariant.unit)
-    wargear!: WargearVariant;
+    wargearVariant!: WargearVariant;
 }
