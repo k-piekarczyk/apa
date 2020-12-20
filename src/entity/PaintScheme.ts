@@ -12,7 +12,7 @@ export class PaintScheme {
     name!: string;
 
     @Column()
-    image!:({})
+    image!: string;
 
     @ManyToMany(() => Unit, unit => unit.paintSchemes)
     units!: Unit[];
