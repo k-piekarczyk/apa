@@ -20,9 +20,9 @@ export class Unit {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column({unique: true, length: 64})
+    @Column({ unique: true, length: 64 })
     name!: string;
-    
+
     @ManyToOne(() => Force, force => force.units)
     force!: Force;
 
