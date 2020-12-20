@@ -15,6 +15,9 @@ export class Paint {
     @PrimaryGeneratedColumn()
     id!: number;
 
+    @Column({unique: true, length: 64})
+    name!: string;
+
     @Column({ type: 'enum', enum: PaintType, default: PaintType.Base })
     type!: PaintType;
 
