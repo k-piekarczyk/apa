@@ -14,10 +14,10 @@ export class User {
     @Column({ length: 60 })
     passwordHash!: string;
 
-    @ManyToMany(type => Paint, paint => paint.owners)
+    @ManyToMany(() => Paint, paint => paint.owners)
     @JoinTable()
     paints!: Paint[];
 
-    @OneToMany(type => Army, army => army.user)
+    @OneToMany(() => Army, army => army.user)
     armies!: Army[];
 }

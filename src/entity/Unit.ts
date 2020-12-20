@@ -10,7 +10,7 @@ export class Unit {
     @Column({unique: true, length: 64})
     name!: string;
     
-    @ManyToOne(type => Force, force => force.units)
+    @ManyToOne(() => Force, force => force.units)
     force!: Force;
 
     @Column("int4range")
