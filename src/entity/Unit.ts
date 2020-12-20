@@ -36,6 +36,7 @@ export class Unit {
     type!: UnitType;
 
     @ManyToMany(() => PaintScheme, paintScheme => paintScheme.units)
+    @JoinTable()
     paintSchemes!: PaintScheme[];
 
     @ManyToMany(() => Wargear, wargear => wargear.units)

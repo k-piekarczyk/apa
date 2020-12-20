@@ -1,5 +1,6 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { PaintSchemePart } from "./PaintSchemePart";
+import { Unit } from "./Unit";
 
 @Entity()
 export class PaintScheme {
@@ -12,6 +13,9 @@ export class PaintScheme {
 
     @Column()
     image!:({})
+
+    @ManyToMany(() => Unit, unit => unit.paintSchemes)
+    units!: Unit[];
 
     @OneToMany(() => PaintSchemePart, paintSchemePart => paintSchemePart.scheme)
     paintSchemeParts!: PaintSchemePart[];
