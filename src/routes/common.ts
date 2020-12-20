@@ -1,5 +1,5 @@
-import express from 'express';
-import debug from 'debug';
+import express from "express";
+import debug from "debug";
 
 export abstract class CommonRouter {
     protected router: express.Router;

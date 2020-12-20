@@ -1,48 +1,51 @@
-import express from 'express';
+import "reflect-metadata"; // Needed for typeORM to work properly
+import express from "express";
 
-import * as bodyparser from 'body-parser';
+import * as bodyparser from "body-parser";
 
-import debug from 'debug';
-import * as winston from 'winston';
-import * as expressWinston from 'express-winston';
-import cors from 'cors';
+import debug from "debug";
+import * as winston from "winston";
+import * as expressWinston from "express-winston";
+import cors from "cors";
 
-import { CommonRouter } from './routes/common';
-import { TestRouter } from './routes/test';
+import { CommonRouter } from "./routes/common";
+import { TestRouter } from "./routes/test";
 
-const app: express.Application = express();
-const debugLog: debug.IDebugger = debug('app');
+export async function initializeApp(): Promise<express.Application> {
+    const app: express.Application = express();
+    const debugLog: debug.IDebugger = debug("app");
 
-app.use(bodyparser.json());
-app.use(cors());
+    app.use(bodyparser.json());
+    app.use(cors());
 
-app.use(expressWinston.logger({
-    transports: [
-        new winston.transports.Console()
-    ],
-    format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.json()
-    )
-}));
+    app.use(expressWinston.logger({
+        transports: [
+            new winston.transports.Console()
+        ],
+        format: winston.format.combine(
+            winston.format.colorize(),
+            winston.format.json()
+        )
+    }));
 
-const routes: Array<CommonRouter> = [
-    new TestRouter('/test')
-];
+    const routes: Array<CommonRouter> = [
+        new TestRouter("/test")
+    ];
 
-routes.forEach((router: CommonRouter) => {
-    app.use(router.getBaseURL(), router.getRouter())
-    debugLog(`${router.getName()} attached to ${router.getBaseURL()}`)
-});
+    routes.forEach((router: CommonRouter) => {
+        app.use(router.getBaseURL(), router.getRouter())
+        debugLog(`${router.getName()} attached to ${router.getBaseURL()}`)
+    });
 
-app.use(expressWinston.errorLogger({
-    transports: [
-        new winston.transports.Console()
-    ],
-    format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.json()
-    )
-}));
+    app.use(expressWinston.errorLogger({
+        transports: [
+            new winston.transports.Console()
+        ],
+        format: winston.format.combine(
+            winston.format.colorize(),
+            winston.format.json()
+        )
+    }));
 
-export default app;
+    return app;
+}
