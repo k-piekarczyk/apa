@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { PaintSchemePart } from "./PaintSchemePart";
 
 @Entity()
 export class PaintScheme {
@@ -8,4 +9,10 @@ export class PaintScheme {
 
     @Column({ unique: true, length: 64 })
     name!: string;
+
+    @Column()
+    image!:({})
+
+    @OneToMany(() => PaintSchemePart, paintSchemePart => paintSchemePart.scheme)
+    paintSchemeParts!: PaintSchemePart[];
 }
