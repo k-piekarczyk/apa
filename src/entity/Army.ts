@@ -1,7 +1,7 @@
-import { Entity, PrimaryColumn, Column, ManyToOne, OneToMany } from 'typeorm';
-import { Force } from './Force';
-import { UnitVariant } from './UnitVariant';
-import { User } from './User';
+import { Entity, PrimaryColumn, Column, ManyToOne, OneToMany } from "typeorm";
+import { Force } from "./Force";
+import { UnitVariant } from "./UnitVariant";
+import { User } from "./User";
 
 @Entity()
 export class Army {

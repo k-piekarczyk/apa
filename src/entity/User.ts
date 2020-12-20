@@ -1,6 +1,6 @@
-import { Entity, PrimaryColumn, Column, ManyToMany, JoinTable, OneToMany } from 'typeorm';
-import { Army } from './Army';
-import { Paint } from './Paint';
+import { Entity, PrimaryColumn, Column, ManyToMany, JoinTable, OneToMany } from "typeorm";
+import { Army } from "./Army";
+import { Paint } from "./Paint";
 
 @Entity()
 export class User {

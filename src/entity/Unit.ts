@@ -4,14 +4,14 @@ import { PaintScheme } from "./PaintScheme";
 import { Wargear } from "./Wargear";
 
 export enum UnitType {
-    HQ = 'hq',
-    Troops = 'troops',
-    Rlites = 'elites',
-    FastAttack = 'fast_attack',
-    HeavySupport = 'heavy_support',
-    DedicatedTransport = 'dedicated_transport',
-    Flyer = 'flyer',
-    Fortification = 'fortification'
+    HQ = "hq",
+    Troops = "troops",
+    Rlites = "elites",
+    FastAttack = "fast_attack",
+    HeavySupport = "heavy_support",
+    DedicatedTransport = "dedicated_transport",
+    Flyer = "flyer",
+    Fortification = "fortification"
 }
 
 @Entity()
@@ -32,7 +32,7 @@ export class Unit {
     @Column()
     pointsPerModel!: number;
 
-    @Column({ type: 'enum', enum: UnitType, default: UnitType.Troops })
+    @Column({ type: "enum", enum: UnitType, default: UnitType.Troops })
     type!: UnitType;
 
     @ManyToMany(() => PaintScheme, paintScheme => paintScheme.units)

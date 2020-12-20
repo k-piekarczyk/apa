@@ -1,18 +1,18 @@
 import "reflect-metadata"; // Needed for typeORM to work properly
-import express from 'express';
+import express from "express";
 
-import * as bodyparser from 'body-parser';
+import * as bodyparser from "body-parser";
 
-import debug from 'debug';
-import * as winston from 'winston';
-import * as expressWinston from 'express-winston';
-import cors from 'cors';
+import debug from "debug";
+import * as winston from "winston";
+import * as expressWinston from "express-winston";
+import cors from "cors";
 
-import { CommonRouter } from './routes/common';
-import { TestRouter } from './routes/test';
+import { CommonRouter } from "./routes/common";
+import { TestRouter } from "./routes/test";
 
 const app: express.Application = express();
-const debugLog: debug.IDebugger = debug('app');
+const debugLog: debug.IDebugger = debug("app");
 
 app.use(bodyparser.json());
 app.use(cors());
@@ -28,7 +28,7 @@ app.use(expressWinston.logger({
 }));
 
 const routes: Array<CommonRouter> = [
-    new TestRouter('/test')
+    new TestRouter("/test")
 ];
 
 routes.forEach((router: CommonRouter) => {

@@ -1,12 +1,12 @@
 import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, OneToMany } from "typeorm";
 import { PaintSchemePart } from "./PaintSchemePart";
-import { User } from './User';
+import { User } from "./User";
 
 export enum PaintType {
-    Base = 'base',
-    Layer = 'layer',
-    Shade = 'shade',
-    Technical = 'technical'
+    Base = "base",
+    Layer = "layer",
+    Shade = "shade",
+    Technical = "technical"
 }
 
 @Entity()
@@ -18,7 +18,7 @@ export class Paint {
     @Column({unique: true, length: 64})
     name!: string;
 
-    @Column({ type: 'enum', enum: PaintType, default: PaintType.Base })
+    @Column({ type: "enum", enum: PaintType, default: PaintType.Base })
     type!: PaintType;
 
     @ManyToMany(() => User, user => user.paints)
