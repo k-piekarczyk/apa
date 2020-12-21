@@ -10,6 +10,8 @@ import cors from "cors";
 
 import { CommonRouter } from "./routes/common";
 import { TestRouter } from "./routes/test";
+import { Connection } from "typeorm";
+import { createTypeORMConnection, injectTypeORMConnection } from "./db";
 
 export async function initializeApp(): Promise<express.Application> {
     const app: express.Application = express();
@@ -17,6 +19,9 @@ export async function initializeApp(): Promise<express.Application> {
 
     app.use(bodyparser.json());
     app.use(cors());
+
+    const dbConnection: Connection = await createTypeORMConnection();
+    app.use(injectTypeORMConnection(dbConnection));
 
     app.use(expressWinston.logger({
         transports: [
