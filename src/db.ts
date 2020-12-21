@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { Connection, createConnection } from "typeorm";
 
 import { Army } from "./entity/Army";
+import { AuthToken } from "./entity/AuthToken";
 import { Force } from "./entity/Force";
 import { Paint } from "./entity/Paint";
 import { PaintScheme } from "./entity/PaintScheme";
@@ -32,7 +33,8 @@ export async function createTypeORMConnection(): Promise<Connection> {
             UnitVariant,
             User,
             Wargear,
-            WargearVariant
+            WargearVariant,
+            AuthToken
         ],
         synchronize: true,
         logging: true,
