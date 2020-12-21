@@ -1,6 +1,6 @@
 import { Request } from "express";
-import { Connection } from "typeorm";
+import { AuthToken } from "../entity/AuthToken";
 
 export interface IRequest extends Request {
-    db?: Connection;
+    token?: AuthToken;
 }
