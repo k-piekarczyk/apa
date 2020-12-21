@@ -15,8 +15,8 @@ export class Paint {
     type!: string;
 
     @ManyToMany(() => User, user => user.paints, {cascade: true})
-    owners!: Paint[];
+    owners!: User[];
 
-    @OneToMany(() => PaintSchemePart, paintSchemePart => paintSchemePart.paint, {cascade: true})
+    @OneToMany(() => PaintSchemePart, paintSchemePart => paintSchemePart.paint)
     paintSchemeParts!: PaintSchemePart[];
 }

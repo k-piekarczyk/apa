@@ -13,6 +13,7 @@ import cookieParser from "cookie-parser";
 import { CommonRouter } from "./routes/common";
 import { AuthRouter } from "./routes/auth";
 import { Connection, createConnection, getConnection } from "typeorm";
+import { PaintRouter } from "./routes/paint";
 
 createConnection().then(async () => {
     const app: express.Application = express();
@@ -31,9 +32,10 @@ createConnection().then(async () => {
             winston.format.json()
         )
     }));
-
+    
     const routes: Array<CommonRouter> = [
-        new AuthRouter("/")
+        new AuthRouter("/"),
+        new PaintRouter("/paint")
     ];
 
     routes.forEach((router: CommonRouter) => {

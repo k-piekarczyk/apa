@@ -6,7 +6,7 @@ import { IRequest } from '../interfaces/request'
 
 export async function verifiedUser(req: IRequest, res: Response, next: NextFunction) {
     try {
-        const token = await getRepository(AuthToken).findOneOrFail({token: req.cookies["AuthToken"]},{relations: ["user"]});
+        const token = await getRepository(AuthToken).findOneOrFail({token: req.cookies["AuthToken"], revoked: false},{relations: ["user"]});
         req.token = token;
         next();
 

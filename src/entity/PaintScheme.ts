@@ -11,12 +11,9 @@ export class PaintScheme {
     @Column({ unique: true, length: 64 })
     name!: string;
 
-    @Column()
-    image!: string;
-
     @ManyToMany(() => Unit, unit => unit.paintSchemes)
     units!: Unit[];
 
-    @OneToMany(() => PaintSchemePart, paintSchemePart => paintSchemePart.scheme, {cascade: true})
+    @OneToMany(() => PaintSchemePart, paintSchemePart => paintSchemePart.scheme)
     paintSchemeParts!: PaintSchemePart[];
 }

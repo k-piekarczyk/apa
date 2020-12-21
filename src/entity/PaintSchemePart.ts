@@ -11,9 +11,9 @@ export class PaintSchemePart {
     @Column()
     order!: number;
 
-    @ManyToOne(() => Paint, paint => paint.paintSchemeParts)
+    @ManyToOne(() => Paint, paint => paint.paintSchemeParts, {cascade: true, eager: true})
     paint!: Paint;
 
-    @ManyToOne(() => PaintScheme, paintScheme => paintScheme.paintSchemeParts)
+    @ManyToOne(() => PaintScheme, paintScheme => paintScheme.paintSchemeParts, {cascade: true})
     scheme!: PaintScheme;
 }
