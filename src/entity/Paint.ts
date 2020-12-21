@@ -2,13 +2,6 @@ import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, OneToMany } from "t
 import { PaintSchemePart } from "./PaintSchemePart";
 import { User } from "./User";
 
-export enum PaintType {
-    Base = "base",
-    Layer = "layer",
-    Shade = "shade",
-    Technical = "technical"
-}
-
 @Entity()
 export class Paint {
 
@@ -18,12 +11,12 @@ export class Paint {
     @Column({unique: true, length: 64})
     name!: string;
 
-    @Column({ type: "enum", enum: PaintType, default: PaintType.Base })
-    type!: PaintType;
+    @Column({length: 32})
+    type!: string;
 
-    @ManyToMany(() => User, user => user.paints)
+    @ManyToMany(() => User, user => user.paints, {cascade: true})
     owners!: Paint[];
 
-    @OneToMany(() => PaintSchemePart, paintSchemePart => paintSchemePart.paint)
+    @OneToMany(() => PaintSchemePart, paintSchemePart => paintSchemePart.paint, {cascade: true})
     paintSchemeParts!: PaintSchemePart[];
 }

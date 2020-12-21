@@ -7,8 +7,8 @@ export abstract class CommonRouter {
     protected baseURL: string;
     protected debugLog: debug.Debugger;
 
-    constructor(router: express.Router, name: string, baseURL: string) {
-        this.router = router;
+    constructor(name: string, baseURL: string) {
+        this.router = express.Router();
         this.name = name;
         this.baseURL = baseURL;
         this.debugLog = debug(name);

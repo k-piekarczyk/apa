@@ -1,5 +1,6 @@
 import "reflect-metadata"; // Needed for typeORM to work properly
 import express from "express";
+import { env } from "process";
 
 import * as bodyparser from "body-parser";
 
@@ -7,21 +8,19 @@ import debug from "debug";
 import * as winston from "winston";
 import * as expressWinston from "express-winston";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 import { CommonRouter } from "./routes/common";
-import { TestRouter } from "./routes/test";
-import { Connection } from "typeorm";
-import { createTypeORMConnection, injectTypeORMConnection } from "./db";
+import { AuthRouter } from "./routes/auth";
+import { Connection, createConnection, getConnection } from "typeorm";
 
-export async function initializeApp(): Promise<express.Application> {
+createConnection().then(async () => {
     const app: express.Application = express();
     const debugLog: debug.IDebugger = debug("app");
 
     app.use(bodyparser.json());
+    app.use(cookieParser());
     app.use(cors());
-
-    const dbConnection: Connection = await createTypeORMConnection();
-    app.use(injectTypeORMConnection(dbConnection));
 
     app.use(expressWinston.logger({
         transports: [
@@ -34,7 +33,7 @@ export async function initializeApp(): Promise<express.Application> {
     }));
 
     const routes: Array<CommonRouter> = [
-        new TestRouter("/test")
+        new AuthRouter("/")
     ];
 
     routes.forEach((router: CommonRouter) => {
@@ -52,5 +51,7 @@ export async function initializeApp(): Promise<express.Application> {
         )
     }));
 
-    return app;
-}
+    app.listen(3000, () => {
+        debugLog(`Server running at http://localhost:${3000}`);
+    })
+}).catch(error => console.log(error));
