@@ -3,17 +3,6 @@ import { Force } from "./Force";
 import { PaintScheme } from "./PaintScheme";
 import { Wargear } from "./Wargear";
 
-export enum UnitType {
-    HQ = "hq",
-    Troops = "troops",
-    Rlites = "elites",
-    FastAttack = "fast_attack",
-    HeavySupport = "heavy_support",
-    DedicatedTransport = "dedicated_transport",
-    Flyer = "flyer",
-    Fortification = "fortification"
-}
-
 @Entity()
 export class Unit {
 
@@ -26,14 +15,17 @@ export class Unit {
     @ManyToOne(() => Force, force => force.units, {cascade: true})
     force!: Force;
 
-    @Column("int4range")
-    modelsPerUnit!: string;
+    @Column()
+    minModelsPerUnit!: number;
+
+    @Column()
+    maxModelsPerUnit!: number;
 
     @Column()
     pointsPerModel!: number;
 
-    @Column({ type: "enum", enum: UnitType, default: UnitType.Troops })
-    type!: UnitType;
+    @Column({ length: 32 })
+    type!: string;
 
     @ManyToMany(() => PaintScheme, paintScheme => paintScheme.units, {cascade: true})
     @JoinTable()
