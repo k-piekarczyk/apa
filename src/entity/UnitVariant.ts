@@ -22,6 +22,6 @@ export class UnitVariant {
     @Column()
     pointValue!: number;
 
-    @OneToMany(() => WargearVariant, wargearVariant => wargearVariant.unit)
+    @OneToMany(() => WargearVariant, wargearVariant => wargearVariant.unit, {cascade: true})
     wargearVariant!: WargearVariant;
 }

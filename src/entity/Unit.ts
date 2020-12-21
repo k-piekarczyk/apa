@@ -23,7 +23,7 @@ export class Unit {
     @Column({ unique: true, length: 64 })
     name!: string;
 
-    @ManyToOne(() => Force, force => force.units)
+    @ManyToOne(() => Force, force => force.units, {cascade: true})
     force!: Force;
 
     @Column("int4range")
@@ -35,11 +35,11 @@ export class Unit {
     @Column({ type: "enum", enum: UnitType, default: UnitType.Troops })
     type!: UnitType;
 
-    @ManyToMany(() => PaintScheme, paintScheme => paintScheme.units)
+    @ManyToMany(() => PaintScheme, paintScheme => paintScheme.units, {cascade: true})
     @JoinTable()
     paintSchemes!: PaintScheme[];
 
-    @ManyToMany(() => Wargear, wargear => wargear.units)
+    @ManyToMany(() => Wargear, wargear => wargear.units, {cascade: true})
     @JoinTable()
     wargear!: Wargear[];
 }

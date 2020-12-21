@@ -1,5 +1,6 @@
 import "reflect-metadata"; // Needed for typeORM to work properly
 import express from "express";
+import {env} from "process";
 
 import * as bodyparser from "body-parser";
 
@@ -13,6 +14,8 @@ import { AuthRouter } from "./routes/auth";
 import { Connection } from "typeorm";
 import { createTypeORMConnection, injectTypeORMConnection } from "./db";
 
+
+
 export async function initializeApp(): Promise<express.Application> {
     const app: express.Application = express();
     const debugLog: debug.IDebugger = debug("app");
@@ -21,6 +24,19 @@ export async function initializeApp(): Promise<express.Application> {
     app.use(cors());
 
     const dbConnection: Connection = await createTypeORMConnection();
+
+    if (env.DEBUG) {
+        const { Direction, Flags, Format, TypeormUml } = require('typeorm-uml');
+        const flags: typeof Flags = {
+            direction: Direction.LR,
+            format: Format.SVG
+        };
+    
+        const typeormUml = new TypeormUml();
+        const url = await typeormUml.build( dbConnection, flags );
+        debugLog( "Diagram URL: " + url);
+    }
+    
     app.use(injectTypeORMConnection(dbConnection));
 
     app.use(expressWinston.logger({

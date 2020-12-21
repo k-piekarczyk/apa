@@ -17,6 +17,6 @@ export class PaintScheme {
     @ManyToMany(() => Unit, unit => unit.paintSchemes)
     units!: Unit[];
 
-    @OneToMany(() => PaintSchemePart, paintSchemePart => paintSchemePart.scheme)
+    @OneToMany(() => PaintSchemePart, paintSchemePart => paintSchemePart.scheme, {cascade: true})
     paintSchemeParts!: PaintSchemePart[];
 }

@@ -21,9 +21,9 @@ export class Paint {
     @Column({ type: "enum", enum: PaintType, default: PaintType.Base })
     type!: PaintType;
 
-    @ManyToMany(() => User, user => user.paints)
+    @ManyToMany(() => User, user => user.paints, {cascade: true})
     owners!: Paint[];
 
-    @OneToMany(() => PaintSchemePart, paintSchemePart => paintSchemePart.paint)
+    @OneToMany(() => PaintSchemePart, paintSchemePart => paintSchemePart.paint, {cascade: true})
     paintSchemeParts!: PaintSchemePart[];
 }
