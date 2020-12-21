@@ -9,7 +9,7 @@ import * as expressWinston from "express-winston";
 import cors from "cors";
 
 import { CommonRouter } from "./routes/common";
-import { TestRouter } from "./routes/test";
+import { AuthRouter } from "./routes/auth";
 import { Connection } from "typeorm";
 import { createTypeORMConnection, injectTypeORMConnection } from "./db";
 
@@ -34,7 +34,7 @@ export async function initializeApp(): Promise<express.Application> {
     }));
 
     const routes: Array<CommonRouter> = [
-        new TestRouter("/test")
+        new AuthRouter("/")
     ];
 
     routes.forEach((router: CommonRouter) => {
