@@ -1,0 +1,19 @@
+<div class="row justify-content-md-center" style="margin-top: 30px">
+    <div class="col-md-4">
+        <h4 class="">Scheme: {{scheme.name}}</h2>
+        <ul class="list-group mt-2">
+            {{#each schemeParts as |part|}}
+            <li class="list-group-item"><span class="text-muted font-weight-light font-italic">{{part.order}}</span> <span class="font-weight-bold">{{part.paint.name}}</span> {{part.paint.type}}</li>
+            {{/each}}
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <h4 class="">Add paints</h2>
+        <ul class="list-group mt-2">
+            {{#each paints as |paint|}}
+            <li class="list-group-item"><span class="font-weight-bold">{{paint.name}}</span> {{paint.type}} <a href="/paint/{{paint.id}}/scheme/{{../scheme.id}}/add">➕</a></li>
+            {{/each}}
+        </ul>
+    </div>
+
+</div>
