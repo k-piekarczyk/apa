@@ -32,18 +32,18 @@ export class AuthRouter extends CommonRouter {
     }
 
     async registerView(req: IRequest, res: Response) {
-        return res.render("register", {layout: 'unverified'});
+        return res.render("auth/register", {layout: 'unverified'});
     }
 
     async loginView(req: IRequest, res: Response) {
-        return res.render("login", {layout: 'unverified'});
+        return res.render("auth/login", {layout: 'unverified'});
     }
 
     async register(req: IRequest, res: Response) {
         const { username, password, confirmPassword } = req.body;
         this.debugLog(username, password, confirmPassword);
         if (password !== confirmPassword) {
-            return res.status(400).render("register", {
+            return res.status(400).render("auth/register", {
                 message: "Password doesn't match.",
                 messageClass: "alert-danger",
                 layout: 'unverified'
@@ -54,7 +54,7 @@ export class AuthRouter extends CommonRouter {
 
 
         if (await userRepo.findOne({ username })) {
-            return res.status(400).render("register", {
+            return res.status(400).render("auth/register", {
                 message: "User already registered.",
                 messageClass: "alert-danger",
                 layout: 'unverified'
@@ -68,14 +68,14 @@ export class AuthRouter extends CommonRouter {
         try {
             await getRepository(User).insert(newUser);
         } catch (err) {
-            return res.status(400).render("register", {
+            return res.status(400).render("auth/register", {
                 message: err.message,
                 messageClass: "alert-danger",
                 layout: 'unverified'
             });
         }
 
-        return res.status(201).render("login",{
+        return res.status(201).render("auth/login",{
             message: "Registration complete. Please log in to continue.",
             messageClass: "alert-success",
             layout: 'unverified'
@@ -99,7 +99,7 @@ export class AuthRouter extends CommonRouter {
             return res.redirect("/");
 
         } catch (err) {
-            return res.status(400).render("login", {
+            return res.status(400).render("auth/login", {
                 message: "Wrong credentials.",
                 messageClass: "alert-danger",
                 layout: 'unverified'

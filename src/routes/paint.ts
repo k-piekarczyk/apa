@@ -36,13 +36,13 @@ export class PaintRouter extends CommonRouter {
             p["owned"] = paint.owners.find(u => u.username === req.token.user.username);
             return p;
         })
-        return res.render("paints", {
+        return res.render("paint/paints", {
             paints: mapped
         });
     }
 
     async addView(req: IRequest, res: Response) {
-        return res.render("addPaint");
+        return res.render("paint/addPaint");
     }
 
     async add(req: IRequest, res: Response) {
@@ -55,7 +55,7 @@ export class PaintRouter extends CommonRouter {
         try {
             await getRepository(Paint).insert(newPaint);
         } catch (err) {
-            return res.status(400).render("addPaint", {
+            return res.status(400).render("paint/addPaint", {
                 message: "A paint with that name already exists.",
                 messageClass: "alert-danger"
             });
@@ -66,7 +66,7 @@ export class PaintRouter extends CommonRouter {
 
     async getCollection(req: IRequest, res: Response) {
         let user = await getRepository(User).findOne({ username: req.token?.user.username }, { relations: ["paints"] });
-        return res.render("collection", {
+        return res.render("paint/collection", {
             paints: user.paints
         });
     }
@@ -101,11 +101,11 @@ export class PaintRouter extends CommonRouter {
 
     async getAllSchemes(req: IRequest, res: Response) {
         const schemes = await getRepository(PaintScheme).find();
-        return res.render("schemeList", { schemes });
+        return res.render("scheme/schemeList", { schemes });
     }
 
     async addSchemeView(req: IRequest, res: Response) {
-        return res.render("addScheme");
+        return res.render("scheme/addScheme");
     }
 
     async addScheme(req: IRequest, res: Response) {
@@ -117,7 +117,7 @@ export class PaintRouter extends CommonRouter {
             const scheme = await getRepository(PaintScheme).findOne({name: newScheme.name});
             return res.status(201).redirect("/paint/scheme/" + scheme.id);
         } catch (err) {
-            return res.status(400).render("addScheme", {
+            return res.status(400).render("scheme/addScheme", {
                 message: "There is a scheme with that name already.",
                 messageClass: "alert-default"
             });
@@ -132,7 +132,7 @@ export class PaintRouter extends CommonRouter {
             const schemeParts = await getRepository(PaintSchemePart).find({scheme: scheme});
             const paints = await getRepository(Paint).find();
 
-            return res.render("schemeDetail", {
+            return res.render("scheme/schemeDetail", {
                 scheme,
                 schemeParts,
                 paints

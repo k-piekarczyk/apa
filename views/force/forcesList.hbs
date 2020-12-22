@@ -1,0 +1,9 @@
+<div class="container">
+    <h1>Forces</h1>
+    <a class="btn btn-primary" href="/force/add">Add a force</a>
+    <ul class="list-group mt-2">
+        {{#each forces as |force|}}
+            <li class="list-group-item font-weight-bold">{{force.name}}</li>
+        {{/each}}
+    </ul>
+</div>
