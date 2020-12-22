@@ -1,7 +1,7 @@
 <div class="row justify-content-md-center" style="margin-top: 30px">
     <div class="col-md-4">
 
-        <h2>Add Scheme</h2>
+        <h2>Add a force</h2>
 
         {{#if message}}
             <div class="alert {{messageClass}}" role="alert">
@@ -9,7 +9,7 @@
             </div>
         {{/if}}
 
-        <form method="POST" action="/paint/scheme/add">
+        <form method="POST" action="/force/add">
             <div class="form-group">
                 <label for="nameInput">Name</label>
                 <input name="name" type="text" class="form-control" id="nameInput" required="true">
