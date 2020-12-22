@@ -17,7 +17,12 @@
 
             <div class="form-group">
                 <label for="typeInput">Type</label>
-                <input name="type" type="text" class="form-control" id="typeInput" placeholder="base | layer | shade" required="true">
+                <select class="custom-select" name="type" id="typeInput">
+                    <option value="base" selected>base</option>
+                    <option value="layer">layer</option>
+                    <option value="shade">shade</option>
+                    <option value="technical">technical</option>
+                </select>
             </div>
 
             <button type="submit" class="btn btn-primary">Add</button>
