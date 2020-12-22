@@ -1,0 +1,9 @@
+<div class="container">
+    <h1>Wargear</h1>
+    <a class="btn btn-primary" href="/wargear/add">Add wargear</a>
+    <ul class="list-group mt-2">
+        {{#each wargearList as |wargear|}}
+        <li class="list-group-item">{{wargear.type}}<span class="font-weight-bold">{{wargear.name}}</span> {{wargear.pointValue}}pts</li>
+        {{/each}}
+    </ul>
+</div>

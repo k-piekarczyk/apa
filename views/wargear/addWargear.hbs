@@ -1,7 +1,7 @@
 <div class="row justify-content-md-center" style="margin-top: 30px">
     <div class="col-md-4">
 
-        <h2>Add Paint</h2>
+        <h2>Add Wargear</h2>
 
         {{#if message}}
             <div class="alert {{messageClass}}" role="alert">
@@ -17,7 +17,12 @@
 
             <div class="form-group">
                 <label for="typeInput">Type</label>
-                <input name="type" type="text" class="form-control" id="typeInput" placeholder="base | layer | shade" required="true">
+                <input name="type" type="text" class="form-control" id="typeInput" required="true">
+            </div>
+
+            <div class="form-group">
+                <label for="pointValueInput">Point value</label>
+                <input name="pointValue" type="number" class="form-control" id="pointValueInput" required="true" min="0" value="0">
             </div>
 
             <button type="submit" class="btn btn-primary">Add</button>

@@ -1,7 +1,7 @@
-import { EOL } from 'os';
+import { EOL } from "os";
 
-import { Direction, Flags, Format, TypeormUml } from 'typeorm-uml';
-import { createConnection } from 'typeorm';
+import { Direction, Flags, Format, TypeormUml } from "typeorm-uml";
+import { createConnection } from "typeorm";
 
 createConnection().then( async ( connection ) => {
     const flags: Flags = {
@@ -12,5 +12,5 @@ createConnection().then( async ( connection ) => {
     const typeormUml = new TypeormUml();
     const url = await typeormUml.build( connection, flags );
 
-    process.stdout.write( 'Diagram URL: ' + url + EOL );
+    process.stdout.write( "Diagram URL: " + url + EOL );
 } );

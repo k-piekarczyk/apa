@@ -17,6 +17,8 @@ import { Connection, createConnection, getConnection } from "typeorm";
 import { PaintRouter } from "./routes/paint";
 import { incjectSession } from "./middleware/injectSession";
 import { ForceRouter } from "./routes/force";
+import { Wargear } from "./entity/Wargear";
+import { WargearRouter } from "./routes/wargear";
 
 createConnection().then(async () => {
     const app: express.Application = express();
@@ -49,7 +51,8 @@ createConnection().then(async () => {
     const routes: Array<CommonRouter> = [
         new AuthRouter("/"),
         new PaintRouter("/paint"),
-        new ForceRouter("/force")
+        new ForceRouter("/force"),
+        new WargearRouter("/wargear")
     ];
 
     routes.forEach((router: CommonRouter) => {

@@ -55,6 +55,7 @@ export class PaintRouter extends CommonRouter {
         try {
             await getRepository(Paint).insert(newPaint);
         } catch (err) {
+            this.debugLog(err.message);
             return res.status(400).render("paint/addPaint", {
                 message: "A paint with that name already exists.",
                 messageClass: "alert-danger"
@@ -81,6 +82,7 @@ export class PaintRouter extends CommonRouter {
 
             return res.status(201).redirect("/paint");
         } catch (err) {
+            this.debugLog(err.message);
             return res.status(201).redirect("/paint");
         }
     }
@@ -95,6 +97,7 @@ export class PaintRouter extends CommonRouter {
 
             return res.status(201).redirect("/paint/collection");
         } catch (err) {
+            this.debugLog(err.message);
             return res.status(201).redirect("/paint/collection");
         }
     }
@@ -117,6 +120,7 @@ export class PaintRouter extends CommonRouter {
             const scheme = await getRepository(PaintScheme).findOne({name: newScheme.name});
             return res.status(201).redirect("/paint/scheme/" + scheme.id);
         } catch (err) {
+            this.debugLog(err.message);
             return res.status(400).render("scheme/addScheme", {
                 message: "There is a scheme with that name already.",
                 messageClass: "alert-default"
@@ -138,6 +142,7 @@ export class PaintRouter extends CommonRouter {
                 paints
             });
         } catch (err) {
+            this.debugLog(err.message);
             return res.send({
                 message: err.message
             });

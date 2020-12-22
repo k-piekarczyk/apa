@@ -37,6 +37,7 @@ export class ForceRouter extends CommonRouter {
         try {
             await getRepository(Force).insert(newForce);
         } catch (error) {
+            this.debugLog(error.message);
             return res.status(400).render("force/addForce", {
                 message: "Force with that name already exists.",
                 messageClass: "alert-danger"

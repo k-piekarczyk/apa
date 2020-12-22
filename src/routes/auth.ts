@@ -1,14 +1,14 @@
-import { NextFunction, response, Response } from 'express';
-import { IRequest } from '../interfaces/request';
-import { CommonRouter } from './common'
-import { checkToken, verifiedUser } from '../middleware/auth';
+import { NextFunction, response, Response } from "express";
+import { IRequest } from "../interfaces/request";
+import { CommonRouter } from "./common"
+import { checkToken, verifiedUser } from "../middleware/auth";
 
-import { User } from '../entity/User';
+import { User } from "../entity/User";
 
-import crypto from 'crypto';
-import bcrypt from 'bcrypt';
-import { getRepository } from 'typeorm';
-import { AuthToken } from '../entity/AuthToken';
+import crypto from "crypto";
+import bcrypt from "bcrypt";
+import { getRepository } from "typeorm";
+import { AuthToken } from "../entity/AuthToken";
 
 export class AuthRouter extends CommonRouter {
     constructor(baseURL: string) {
@@ -68,6 +68,7 @@ export class AuthRouter extends CommonRouter {
         try {
             await getRepository(User).insert(newUser);
         } catch (err) {
+            this.debugLog(err.message);
             return res.status(400).render("auth/register", {
                 message: err.message,
                 messageClass: "alert-danger",
@@ -89,7 +90,7 @@ export class AuthRouter extends CommonRouter {
             if (!await bcrypt.compare(req.body.password, user.passwordHash)) throw new Error();
 
             const authToken = new AuthToken();
-            authToken.token = crypto.randomBytes(30).toString('hex');
+            authToken.token = crypto.randomBytes(30).toString("hex");
             authToken.user = user;
             authToken.revoked = false;
 
@@ -99,6 +100,7 @@ export class AuthRouter extends CommonRouter {
             return res.redirect("/");
 
         } catch (err) {
+            this.debugLog(err.message);
             return res.status(400).render("auth/login", {
                 message: "Wrong credentials.",
                 messageClass: "alert-danger",
@@ -114,7 +116,7 @@ export class AuthRouter extends CommonRouter {
 
         await getRepository(AuthToken).save(token);
 
-        res.cookie("AuthToken", 'delete', { maxAge: 0 });
+        res.cookie("AuthToken", "delete", { maxAge: 0 });
         return res.redirect("/");
     }
 }

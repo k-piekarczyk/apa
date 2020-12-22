@@ -6,9 +6,8 @@
         <li class="list-group-item"><span class="font-weight-bold">{{paint.name}}</span> {{paint.type}} {{#unless
             paint.owned}}
             <a href="/paint/{{paint.id}}/collection/add" data-toggle="tooltip" data-placement="right"
-                title="Add to your collection">➕</a>
+                title="Add to your collection">➕</a> {{/unless}}
         </li>
-        {{/unless}}
         {{/each}}
     </ul>
 </div>
