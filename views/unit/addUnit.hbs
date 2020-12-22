@@ -1,0 +1,62 @@
+<div class="row justify-content-md-center" style="margin-top: 30px">
+    <div class="col-md-4">
+
+        <h2>Add a unit</h2>
+
+        {{#if message}}
+        <div class="alert {{messageClass}}" role="alert">
+            {{message}}
+        </div>
+        {{/if}}
+
+        <form method="POST" action="/unit/add">
+            <div class="form-group">
+                <label for="nameInput">Name</label>
+                <input name="name" type="text" class="form-control" id="nameInput" required="true">
+            </div>
+
+            <div class="form-group">
+                <label for="forceInput">Force</label>
+                <select class="custom-select" name="forceName" id="forceInput" required="true">
+                    {{#each forces as |force|}}
+                        <option value="{{force.name}}">{{force.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="typeInput">Type</label>
+                <select class="custom-select" name="type" id="typeInput" required="true">
+                    <option value="HQ" selected>HQ</option>
+                    <option value="troops">troops</option>
+                    <option value="elites">elites</option>
+                    <option value="fast attack">fast attack</option>
+                    <option value="heavy support">heavy support</option>
+                    <option value="dedicated transport">dedicated transport</option>
+                    <option value="flyer">flyer</option>
+                    <option value="fortification">fortification</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="minPerUnitInput">Minimum models per unit</label>
+                <input name="minPerUnit" type="number" class="form-control" id="minPerUnitInput" required="true" min="0"
+                    value="0">
+            </div>
+
+            <div class="form-group">
+                <label for="maxPerUnitInput">Maximum models per unit</label>
+                <input name="maxPerUnit" type="number" class="form-control" id="maxPerUnitInput" required="true" min="0"
+                    value="0">
+            </div>
+
+            <div class="form-group">
+                <label for="pointsPerModelInput">Points per model</label>
+                <input name="pointsPerModel" type="number" class="form-control" id="pointsPerModelInput" required="true" min="0"
+                    value="0">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div>

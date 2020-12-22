@@ -19,6 +19,7 @@ import { incjectSession } from "./middleware/injectSession";
 import { ForceRouter } from "./routes/force";
 import { Wargear } from "./entity/Wargear";
 import { WargearRouter } from "./routes/wargear";
+import { UnitRouter } from "./routes/unit";
 
 createConnection().then(async () => {
     const app: express.Application = express();
@@ -52,7 +53,8 @@ createConnection().then(async () => {
         new AuthRouter("/"),
         new PaintRouter("/paint"),
         new ForceRouter("/force"),
-        new WargearRouter("/wargear")
+        new WargearRouter("/wargear"),
+        new UnitRouter("/unit")
     ];
 
     routes.forEach((router: CommonRouter) => {
