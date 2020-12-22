@@ -1,5 +1,6 @@
 import { Response } from "express";
 import { getRepository } from "typeorm";
+import { RelationLoader } from "typeorm/query-builder/RelationLoader";
 import { Wargear } from "../entity/Wargear";
 import { IRequest } from "../interfaces/request";
 import { verifiedUser } from "../middleware/auth";
@@ -35,6 +36,16 @@ export class WargearRouter extends CommonRouter {
         newWargear.type = type;
         newWargear.pointValue = pointValue;
 
-        
+        try {
+            await getRepository(Wargear).insert(newWargear);
+        } catch (error) {
+            this.debugLog(error.message);
+            return res.status(400).render("wargear/addWargear", {
+                message: "Wargear with that name already exists.",
+                messageClass: "alert-danger"
+            });
+        }
+
+        return res.redirect("/wargear");
     }
 }

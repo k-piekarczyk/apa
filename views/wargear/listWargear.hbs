@@ -3,7 +3,7 @@
     <a class="btn btn-primary" href="/wargear/add">Add wargear</a>
     <ul class="list-group mt-2">
         {{#each wargearList as |wargear|}}
-        <li class="list-group-item">{{wargear.type}}<span class="font-weight-bold">{{wargear.name}}</span> {{wargear.pointValue}}pts</li>
+        <li class="list-group-item"><span class="font-weight-bold">{{wargear.name}}</span> [<span class="font-italic">{{wargear.type}}</span>] {{wargear.pointValue}}pts</li>
         {{/each}}
     </ul>
 </div>
