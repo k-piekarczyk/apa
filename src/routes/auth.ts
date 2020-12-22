@@ -28,15 +28,15 @@ export class AuthRouter extends CommonRouter {
     async home(req: IRequest, res: Response) {
         this.debugLog("token: ", req.token)
         if (req.token) return res.render("home")
-        else return res.render("home", {layout: 'unverified'});
+        else return res.render("home", {layout: "unverified"});
     }
 
     async registerView(req: IRequest, res: Response) {
-        return res.render("auth/register", {layout: 'unverified'});
+        return res.render("auth/register", {layout: "unverified"});
     }
 
     async loginView(req: IRequest, res: Response) {
-        return res.render("auth/login", {layout: 'unverified'});
+        return res.render("auth/login", {layout: "unverified"});
     }
 
     async register(req: IRequest, res: Response) {
@@ -46,7 +46,7 @@ export class AuthRouter extends CommonRouter {
             return res.status(400).render("auth/register", {
                 message: "Password doesn't match.",
                 messageClass: "alert-danger",
-                layout: 'unverified'
+                layout: "unverified"
             })
         }
 
@@ -57,7 +57,7 @@ export class AuthRouter extends CommonRouter {
             return res.status(400).render("auth/register", {
                 message: "User already registered.",
                 messageClass: "alert-danger",
-                layout: 'unverified'
+                layout: "unverified"
             })
         }
 
@@ -71,14 +71,14 @@ export class AuthRouter extends CommonRouter {
             return res.status(400).render("auth/register", {
                 message: err.message,
                 messageClass: "alert-danger",
-                layout: 'unverified'
+                layout: "unverified"
             });
         }
 
         return res.status(201).render("auth/login",{
             message: "Registration complete. Please log in to continue.",
             messageClass: "alert-success",
-            layout: 'unverified'
+            layout: "unverified"
         });
     }
 
@@ -102,7 +102,7 @@ export class AuthRouter extends CommonRouter {
             return res.status(400).render("auth/login", {
                 message: "Wrong credentials.",
                 messageClass: "alert-danger",
-                layout: 'unverified'
+                layout: "unverified"
             });
         }
     }
