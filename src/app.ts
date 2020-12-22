@@ -2,26 +2,38 @@ import "reflect-metadata"; // Needed for typeORM to work properly
 import express from "express";
 import { env } from "process";
 
-import * as bodyparser from "body-parser";
+import * as bodyParser from "body-parser";
 
 import debug from "debug";
 import * as winston from "winston";
 import * as expressWinston from "express-winston";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import handlebars from "express-handlebars";
 
 import { CommonRouter } from "./routes/common";
 import { AuthRouter } from "./routes/auth";
 import { Connection, createConnection, getConnection } from "typeorm";
 import { PaintRouter } from "./routes/paint";
+import { incjectSession } from "./middleware/injectSession";
 
 createConnection().then(async () => {
     const app: express.Application = express();
     const debugLog: debug.IDebugger = debug("app");
 
-    app.use(bodyparser.json());
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
     app.use(cookieParser());
     app.use(cors());
+
+    app.use(incjectSession);
+    
+    app.set("view engine", "hbs");
+    app.engine("hbs", handlebars({
+        extname: ".hbs",
+        layoutsDir: __dirname + "/../views/layouts",
+        defaultLayout: "main"
+    }));
 
     app.use(expressWinston.logger({
         transports: [

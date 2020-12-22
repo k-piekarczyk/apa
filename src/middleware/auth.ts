@@ -11,8 +11,19 @@ export async function verifiedUser(req: IRequest, res: Response, next: NextFunct
         next();
 
     } catch (err) {
-        return res.status(400).json({
-            message:"You are not logged in!"
+        return res.status(403).render("notLoggedIn", {
+            layout: "unverified"
         });
+    }
+}
+
+export async function checkToken(req: IRequest, res: Response, next: NextFunction) {
+    try {
+        const token = await getRepository(AuthToken).findOneOrFail({token: req.cookies["AuthToken"], revoked: false},{relations: ["user"]});
+        req.token = token;
+        next();
+
+    } catch (err) {
+        next();
     }
 }
