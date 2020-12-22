@@ -1,5 +1,5 @@
 {
-  "name": "apa-server",
+  "name": "apa",
   "version": "0.0.1",
   "description": "",
   "main": "dist/server.js",
