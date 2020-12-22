@@ -15,7 +15,8 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "strictNullChecks": false
   },
   "exclude": ["node_modules", "src/@types"],
 }
