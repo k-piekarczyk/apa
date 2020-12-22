@@ -32,11 +32,11 @@ export class AuthRouter extends CommonRouter {
     }
 
     async registerView(req: IRequest, res: Response) {
-        return res.render("register");
+        return res.render("register", {layout: 'unverified'});
     }
 
     async loginView(req: IRequest, res: Response) {
-        return res.render("login");
+        return res.render("login", {layout: 'unverified'});
     }
 
     async register(req: IRequest, res: Response) {
@@ -45,7 +45,8 @@ export class AuthRouter extends CommonRouter {
         if (password !== confirmPassword) {
             return res.status(400).render("register", {
                 message: "Password doesn't match.",
-                messageClass: "alert-danger"
+                messageClass: "alert-danger",
+                layout: 'unverified'
             })
         }
 
@@ -55,7 +56,8 @@ export class AuthRouter extends CommonRouter {
         if (await userRepo.findOne({ username })) {
             return res.status(400).render("register", {
                 message: "User already registered.",
-                messageClass: "alert-danger"
+                messageClass: "alert-danger",
+                layout: 'unverified'
             })
         }
 
@@ -68,13 +70,15 @@ export class AuthRouter extends CommonRouter {
         } catch (err) {
             return res.status(400).render("register", {
                 message: err.message,
-                messageClass: "alert-danger"
+                messageClass: "alert-danger",
+                layout: 'unverified'
             });
         }
 
-        return res.status(201).render("/login",{
+        return res.status(201).render("login",{
             message: "Registration complete. Please log in to continue.",
-            messageClass: "alert-success"
+            messageClass: "alert-success",
+            layout: 'unverified'
         });
     }
 
@@ -97,7 +101,8 @@ export class AuthRouter extends CommonRouter {
         } catch (err) {
             return res.status(400).render("login", {
                 message: "Wrong credentials.",
-                messageClass: "alert-danger"
+                messageClass: "alert-danger",
+                layout: 'unverified'
             });
         }
     }
