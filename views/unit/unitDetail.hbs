@@ -1,0 +1,33 @@
+<div class="row justify-content-md-center" style="margin-top: 30px">
+    <span class="font-weight-bold">{{unit.name}}</span> [<spanclass="font-italic">{{unit.type}}</span>]
+        {{unit.force.name}}
+</div>
+<div class="row justify-content-md-center" style="margin-top: 30px">
+    Models per unit: {{unit.minModelsPerUnit}}-{{unit.maxModelsPerUnit}}
+</div>
+<div class="row justify-content-md-center" style="margin-top: 30px">
+    Points per model: {{unit.pointsPerModel}}
+</div>
+
+<div class="row justify-content-md-center" style="margin-top: 30px">
+    <div class="col-md-4">
+        <h4 class="">Schemes: {{scheme.name}}</h2>
+            <ul class="list-group mt-2">
+                {{#each unit.paintSchemes as |scheme|}}
+                <li class="list-group-item"><a class="font-weight-bold"
+                        href="/paint/scheme/{{scheme.id}}">{{scheme.name}}</a></li>
+                {{/each}}
+            </ul>
+    </div>
+    <div class="col-md-4">
+        <h4 class="">Add schemes</h2>
+            <ul class="list-group mt-2">
+                {{#each schemes as |scheme|}}
+                <li class="list-group-item"><a class="font-weight-bold"
+                        href="/paint/scheme/{{scheme.id}}">{{scheme.name}}</a><a
+                        href="/unit/{{../unit.id}}/scheme/{{scheme.id}}/add" data-toggle="tooltip"
+                        data-placement="right" title="Add scheme to unit">➕</a></li>
+                {{/each}}
+            </ul>
+    </div>
+</div>

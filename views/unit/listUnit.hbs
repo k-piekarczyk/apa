@@ -5,7 +5,7 @@
         {{#each units as |unit|}}
         <li class="list-group-item">
             <div>
-                <span class="font-weight-bold">{{unit.name}}</span> [<spanclass="font-italic">{{unit.type}}</span>] {{unit.force.name}}
+                <a class="font-weight-bold" href="/unit/{{unit.id}}">{{unit.name}}</a> [<spanclass="font-italic">{{unit.type}}</span>] {{unit.force.name}}
             </div>
             <div>
                 models per unit: {{unit.minModelsPerUnit}}-{{unit.maxModelsPerUnit}}    points per model: {{unit.pointsPerModel}}
