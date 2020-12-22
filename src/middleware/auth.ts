@@ -16,7 +16,7 @@ export async function verifiedUser(req: IRequest, res: Response, next: NextFunct
 
     } catch (err) {
         debugLogVU(err.message);
-        return res.status(403).render("notLoggedIn", {
+        return res.status(403).render("auth/notLoggedIn", {
             layout: "unverified"
         });
     }

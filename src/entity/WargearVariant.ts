@@ -11,10 +11,10 @@ export class WargearVariant {
     @Column()
     count!: number;
 
-    @ManyToOne(() => Wargear)
+    @ManyToOne(() => Wargear, { eager: true })
     @JoinColumn([{ name: "wargear_id", referencedColumnName: "id" }])
     wargear!: Wargear;
 
-    @ManyToOne(() => UnitVariant, unitVariant => unitVariant.wargearVariant)
+    @ManyToOne(() => UnitVariant, unitVariant => unitVariant.wargearVariants)
     unit!: UnitVariant;
 }

@@ -1,0 +1,54 @@
+<div class="row justify-content-md-center" style="margin-top: 30px">
+    <h3>{{army.name}}</h3>
+</div>
+<div class="row justify-content-md-center" style="margin-top: 10px">
+    {{army.force.name}}
+</div>
+<div class="row justify-content-md-center" style="margin-top: 10px">
+    Points: {{army.pointValue}}
+</div>
+
+<div class="row justify-content-md-center" style="margin-top: 30px">
+    <div class="col-md-4">
+        <h4 class="">Units</h2>
+            <ul class="list-group mt-2">
+                {{#each unitVariants as |unit|}}
+                <li class="list-group-item">
+                    <div>
+                        <a class="font-weight-bold" href="/army/{{../army.id}}/unitVariant/{{unit.id}}">{{unit.unit.name}}</a>
+                    </div>
+                    <ul class="list-group mt-1">
+                        {{#each unit.wargearVariants as |wargear|}}
+                        <li class="list-group-item"><span class="font-weight-bold">{{wargear.wargear.name}}</span>
+                            [<span class="font-italic">{{wargear.wargear.type}}</span>]
+                            {{wargear.wargear.pointValue}}pts</li>
+                        {{/each}}
+                    </ul>
+                </li>
+                {{/each}}
+            </ul>
+    </div>
+
+
+    <div class="col-md-4">
+        <h4 class="">Add units</h2>
+            <ul class="list-group mt-2">
+                {{#each units as |unit|}}
+                <li class="list-group-item">
+                    <div>
+                        <span class="font-weight-bold">{{unit.name}}</span> [<span
+                            class="font-italic">{{unit.type}}</span>] {{unit.force.name}} <a
+                            href="/army/{{../army.id}}/unit/{{unit.id}}/add" data-toggle="tooltip" data-placement="right"
+                            title="Add unit to army">➕</a>
+                    </div>
+                    <div>
+                        models per unit: {{unit.minModelsPerUnit}}-{{unit.maxModelsPerUnit}}
+                    </div>
+                    <div>
+                        points per model: {{unit.pointsPerModel}}
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
+    </div>
+</div>

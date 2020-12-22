@@ -1,6 +1,5 @@
 import "reflect-metadata"; // Needed for typeORM to work properly
 import express from "express";
-import { env } from "process";
 
 import * as bodyParser from "body-parser";
 
@@ -13,13 +12,13 @@ import handlebars from "express-handlebars";
 
 import { CommonRouter } from "./routes/common";
 import { AuthRouter } from "./routes/auth";
-import { Connection, createConnection, getConnection } from "typeorm";
+import { createConnection } from "typeorm";
 import { PaintRouter } from "./routes/paint";
 import { incjectSession } from "./middleware/injectSession";
 import { ForceRouter } from "./routes/force";
-import { Wargear } from "./entity/Wargear";
 import { WargearRouter } from "./routes/wargear";
 import { UnitRouter } from "./routes/unit";
+import { ArmyRouter } from "./routes/army";
 
 createConnection().then(async () => {
     const app: express.Application = express();
@@ -54,7 +53,8 @@ createConnection().then(async () => {
         new PaintRouter("/paint"),
         new ForceRouter("/force"),
         new WargearRouter("/wargear"),
-        new UnitRouter("/unit")
+        new UnitRouter("/unit"),
+        new ArmyRouter("/army")
     ];
 
     routes.forEach((router: CommonRouter) => {

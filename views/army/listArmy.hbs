@@ -1,0 +1,11 @@
+<div class="container">
+    <h1>Your armies</h1>
+    <a class="btn btn-primary" href="/army/add">Add an army</a>
+    <ul class="list-group mt-2">
+        {{#each armies as |army|}}
+        <li class="list-group-item">
+                <a class="font-weight-bold" href="/army/{{army.id}}">{{army.name}}</a> [{{army.force.name}}] <spanclass="font-italic">{{army.pointValue}}pts</span>
+        </li>
+        {{/each}}
+    </ul>
+</div>
