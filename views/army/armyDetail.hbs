@@ -2,6 +2,9 @@
     <h3>{{army.name}}</h3>
 </div>
 <div class="row justify-content-md-center" style="margin-top: 10px">
+    <a href="/army/{{army.id}}/paints">Get paints</a>
+</div>
+<div class="row justify-content-md-center" style="margin-top: 10px">
     {{army.force.name}}
 </div>
 <div class="row justify-content-md-center" style="margin-top: 10px">
@@ -15,13 +18,27 @@
                 {{#each unitVariants as |unit|}}
                 <li class="list-group-item">
                     <div>
-                        <a class="font-weight-bold" href="/army/{{../army.id}}/unitVariant/{{unit.id}}">{{unit.unit.name}}</a>
+                        <a class="font-weight-bold"
+                            href="/army/{{../army.id}}/unitVariant/{{unit.id}}">{{unit.unit.name}}</a>
+                        [<span class="font-italic">{{unit.unit.type}}</span>]
+
+                        <a href="/army/{{../army.id}}/unitVariant/{{unit.id}}/decrease"
+                            data-toggle="tooltip" data-placement="top" title="Decrease count">➖</a>
+
+                        <span class="font-weight-bold font-italic">x{{unit.numberOfModels}}</span>
+
+                        <a href="/army/{{../army.id}}/unitVariant/{{unit.id}}/increase"
+                        data-toggle="tooltip" data-placement="top" title="Increase count">➕</a>
+
+                        {{unit.pointValue}}pts
+
                     </div>
                     <ul class="list-group mt-1">
                         {{#each unit.wargearVariants as |wargear|}}
                         <li class="list-group-item"><span class="font-weight-bold">{{wargear.wargear.name}}</span>
                             [<span class="font-italic">{{wargear.wargear.type}}</span>]
-                            {{wargear.wargear.pointValue}}pts</li>
+                            {{wargear.wargear.pointValue}}pts <span
+                                class="font-weight-bold font-italic">x{{wargear.count}}</span></li>
                         {{/each}}
                     </ul>
                 </li>
@@ -38,8 +55,8 @@
                     <div>
                         <span class="font-weight-bold">{{unit.name}}</span> [<span
                             class="font-italic">{{unit.type}}</span>] {{unit.force.name}} <a
-                            href="/army/{{../army.id}}/unit/{{unit.id}}/add" data-toggle="tooltip" data-placement="right"
-                            title="Add unit to army">➕</a>
+                            href="/army/{{../army.id}}/unit/{{unit.id}}/add" data-toggle="tooltip"
+                            data-placement="right" title="Add unit to army">➕</a>
                     </div>
                     <div>
                         models per unit: {{unit.minModelsPerUnit}}-{{unit.maxModelsPerUnit}}

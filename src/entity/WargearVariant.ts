@@ -11,7 +11,7 @@ export class WargearVariant {
     @Column()
     count!: number;
 
-    @ManyToOne(() => Wargear, { eager: true })
+    @ManyToOne(() => Wargear)
     @JoinColumn([{ name: "wargear_id", referencedColumnName: "id" }])
     wargear!: Wargear;
 
