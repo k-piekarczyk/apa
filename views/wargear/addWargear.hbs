@@ -1,0 +1,36 @@
+<div class="row justify-content-md-center" style="margin-top: 30px">
+    <div class="col-md-4">
+
+        <h2>Add Wargear</h2>
+
+        {{#if message}}
+        <div class="alert {{messageClass}}" role="alert">
+            {{message}}
+        </div>
+        {{/if}}
+
+        <form method="POST" action="/wargear/add">
+            <div class="form-group">
+                <label for="nameInput">Name</label>
+                <input name="name" type="text" class="form-control" id="nameInput" required="true">
+            </div>
+
+            <div class="form-group">
+                <label for="typeInput">Type</label>
+                <select class="custom-select" name="type" id="typeInput">
+                    <option value="melee" selected>melee</option>
+                    <option value="ranged">ranged</option>
+                    <option value="other">other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="pointValueInput">Point value</label>
+                <input name="pointValue" type="number" class="form-control" id="pointValueInput" required="true" min="0"
+                    value="0">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div>

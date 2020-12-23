@@ -1,14 +1,14 @@
-import { NextFunction, response, Response } from 'express';
-import { IRequest } from '../interfaces/request';
-import { CommonRouter } from './common'
-import { checkToken, verifiedUser } from '../middleware/auth';
+import { NextFunction, response, Response } from "express";
+import { IRequest } from "../interfaces/request";
+import { CommonRouter } from "./common"
+import { checkToken, verifiedUser } from "../middleware/auth";
 
-import { User } from '../entity/User';
+import { User } from "../entity/User";
 
-import crypto from 'crypto';
-import bcrypt from 'bcrypt';
-import { getRepository } from 'typeorm';
-import { AuthToken } from '../entity/AuthToken';
+import crypto from "crypto";
+import bcrypt from "bcrypt";
+import { getRepository } from "typeorm";
+import { AuthToken } from "../entity/AuthToken";
 
 export class AuthRouter extends CommonRouter {
     constructor(baseURL: string) {
@@ -28,24 +28,25 @@ export class AuthRouter extends CommonRouter {
     async home(req: IRequest, res: Response) {
         this.debugLog("token: ", req.token)
         if (req.token) return res.render("home")
-        else return res.render("home", {layout: 'unverified'});
+        else return res.render("home", {layout: "unverified"});
     }
 
     async registerView(req: IRequest, res: Response) {
-        return res.render("register");
+        return res.render("auth/register", {layout: "unverified"});
     }
 
     async loginView(req: IRequest, res: Response) {
-        return res.render("login");
+        return res.render("auth/login", {layout: "unverified"});
     }
 
     async register(req: IRequest, res: Response) {
         const { username, password, confirmPassword } = req.body;
         this.debugLog(username, password, confirmPassword);
         if (password !== confirmPassword) {
-            return res.status(400).render("register", {
+            return res.status(400).render("auth/register", {
                 message: "Password doesn't match.",
-                messageClass: "alert-danger"
+                messageClass: "alert-danger",
+                layout: "unverified"
             })
         }
 
@@ -53,9 +54,10 @@ export class AuthRouter extends CommonRouter {
 
 
         if (await userRepo.findOne({ username })) {
-            return res.status(400).render("register", {
+            return res.status(400).render("auth/register", {
                 message: "User already registered.",
-                messageClass: "alert-danger"
+                messageClass: "alert-danger",
+                layout: "unverified"
             })
         }
 
@@ -66,15 +68,18 @@ export class AuthRouter extends CommonRouter {
         try {
             await getRepository(User).insert(newUser);
         } catch (err) {
-            return res.status(400).render("register", {
+            this.debugLog(err.message);
+            return res.status(400).render("auth/register", {
                 message: err.message,
-                messageClass: "alert-danger"
+                messageClass: "alert-danger",
+                layout: "unverified"
             });
         }
 
-        return res.status(201).render("/login",{
+        return res.status(201).render("auth/login",{
             message: "Registration complete. Please log in to continue.",
-            messageClass: "alert-success"
+            messageClass: "alert-success",
+            layout: "unverified"
         });
     }
 
@@ -85,7 +90,7 @@ export class AuthRouter extends CommonRouter {
             if (!await bcrypt.compare(req.body.password, user.passwordHash)) throw new Error();
 
             const authToken = new AuthToken();
-            authToken.token = crypto.randomBytes(30).toString('hex');
+            authToken.token = crypto.randomBytes(30).toString("hex");
             authToken.user = user;
             authToken.revoked = false;
 
@@ -95,9 +100,11 @@ export class AuthRouter extends CommonRouter {
             return res.redirect("/");
 
         } catch (err) {
-            return res.status(400).render("login", {
+            this.debugLog(err.message);
+            return res.status(400).render("auth/login", {
                 message: "Wrong credentials.",
-                messageClass: "alert-danger"
+                messageClass: "alert-danger",
+                layout: "unverified"
             });
         }
     }
@@ -109,7 +116,7 @@ export class AuthRouter extends CommonRouter {
 
         await getRepository(AuthToken).save(token);
 
-        res.cookie("AuthToken", 'delete', { maxAge: 0 });
+        res.cookie("AuthToken", "delete", { maxAge: 0 });
         return res.redirect("/");
     }
 }

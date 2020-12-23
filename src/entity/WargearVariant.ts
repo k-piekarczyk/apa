@@ -15,6 +15,6 @@ export class WargearVariant {
     @JoinColumn([{ name: "wargear_id", referencedColumnName: "id" }])
     wargear!: Wargear;
 
-    @ManyToOne(() => UnitVariant, unitVariant => unitVariant.wargearVariant)
+    @ManyToOne(() => UnitVariant, unitVariant => unitVariant.wargearVariants)
     unit!: UnitVariant;
 }

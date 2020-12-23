@@ -1,0 +1,43 @@
+<div class="row justify-content-md-center" style="margin-top: 30px">
+    <h3>{{unitVariant.unit.name}} in <a href="/army/{{unitVariant.army.id}}">{{unitVariant.army.name}}</a></h3>
+</div>
+<div class="row justify-content-md-center" style="margin-top: 10px">
+    Points: {{unitVariant.pointValue}}
+</div>
+
+<div class="row justify-content-md-center" style="margin-top: 30px">
+    <div class="col-md-4">
+        <h4 class="">Wargear</h2>
+            <ul class="list-group mt-2">
+                {{#each unitVariant.wargearVariants as |wargearVariant|}}
+                <li class="list-group-item">
+                    <span class="font-weight-bold">{{wargearVariant.wargear.name}}</span>
+                    [<span class="font-italic">{{wargearVariant.wargear.type}}</span>]
+                    {{wargearVariant.wargear.pointValue}}pts
+
+                    <a href="/army/{{../unitVariant.army.id}}/unitVariant/{{../unitVariant.id}}/wargearVariant/{{wargearVariant.id}}/decrease"
+                        data-toggle="tooltip" data-placement="top" title="Decrease count">➖</a>
+
+                    <span class="font-weight-bold font-italic">x{{wargearVariant.count}}</span>
+                    
+                    <a href="/army/{{../unitVariant.army.id}}/unitVariant/{{../unitVariant.id}}/wargearVariant/{{wargearVariant.id}}/increase"
+                        data-toggle="tooltip" data-placement="top" title="Increase count">➕</a>
+                </li>
+                {{/each}}
+            </ul>
+    </div>
+
+
+    <div class="col-md-4">
+        <h4 class="">Add wargear</h2>
+            <ul class="list-group mt-2">
+                {{#each wargear as |w|}}
+                <li class="list-group-item">
+                    <span class="font-weight-bold">{{w.name}}</span> [{{w.type}}] {{w.pointValue}}pts <a
+                        href="/army/{{../unitVariant.army.id}}/unitVariant/{{../unitVariant.id}}/wargear/{{w.id}}/add"
+                        data-toggle="tooltip" data-placement="right" title="Add wargear to unit">➕</a>
+                </li>
+                {{/each}}
+            </ul>
+    </div>
+</div>

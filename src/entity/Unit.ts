@@ -12,7 +12,7 @@ export class Unit {
     @Column({ unique: true, length: 64 })
     name!: string;
 
-    @ManyToOne(() => Force, force => force.units, {cascade: true})
+    @ManyToOne(() => Force, force => force.units, {cascade: true, eager: true})
     force!: Force;
 
     @Column()

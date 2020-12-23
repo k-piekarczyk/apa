@@ -1,0 +1,16 @@
+<div class="container">
+    <h1>Units</h1>
+    <a class="btn btn-primary" href="/unit/add">Add a unit</a>
+    <ul class="list-group mt-2">
+        {{#each units as |unit|}}
+        <li class="list-group-item">
+            <div>
+                <a class="font-weight-bold" href="/unit/{{unit.id}}">{{unit.name}}</a> [<spanclass="font-italic">{{unit.type}}</span>] {{unit.force.name}}
+            </div>
+            <div>
+                models per unit: {{unit.minModelsPerUnit}}-{{unit.maxModelsPerUnit}}    points per model: {{unit.pointsPerModel}}
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+</div>

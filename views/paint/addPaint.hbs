@@ -1,0 +1,31 @@
+<div class="row justify-content-md-center" style="margin-top: 30px">
+    <div class="col-md-4">
+
+        <h2>Add Paint</h2>
+
+        {{#if message}}
+            <div class="alert {{messageClass}}" role="alert">
+                {{message}}
+            </div>
+        {{/if}}
+
+        <form method="POST" action="/paint/add">
+            <div class="form-group">
+                <label for="nameInput">Name</label>
+                <input name="name" type="text" class="form-control" id="nameInput" required="true">
+            </div>
+
+            <div class="form-group">
+                <label for="typeInput">Type</label>
+                <select class="custom-select" name="type" id="typeInput">
+                    <option value="base" selected>base</option>
+                    <option value="layer">layer</option>
+                    <option value="shade">shade</option>
+                    <option value="technical">technical</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div>

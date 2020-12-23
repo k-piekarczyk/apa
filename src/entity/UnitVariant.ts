@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Army } from "./Army";
 import { Unit } from "./Unit";
 import { WargearVariant } from "./WargearVariant";
@@ -9,7 +9,7 @@ export class UnitVariant {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @ManyToOne(() => Army, army => army.units)
+    @ManyToOne(() => Army, army => army.unitVariants)
     army!: Army;
 
     @ManyToOne(() => Unit)
@@ -22,6 +22,7 @@ export class UnitVariant {
     @Column()
     pointValue!: number;
 
-    @OneToMany(() => WargearVariant, wargearVariant => wargearVariant.unit, {cascade: true})
-    wargearVariant!: WargearVariant;
+    @OneToMany(() => WargearVariant, wargearVariant => wargearVariant.unit, { cascade: true })
+    @JoinTable()
+    wargearVariants!: WargearVariant[];
 }

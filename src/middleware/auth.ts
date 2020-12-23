@@ -1,8 +1,12 @@
-import { Response, NextFunction } from 'express'
-import { getRepository } from 'typeorm';
-import { AuthToken } from '../entity/AuthToken';
-import { User } from '../entity/User';
-import { IRequest } from '../interfaces/request'
+import { Response, NextFunction } from "express"
+import { getRepository } from "typeorm";
+import { AuthToken } from "../entity/AuthToken";
+import { User } from "../entity/User";
+import { IRequest } from "../interfaces/request"
+import debug from "debug";
+
+const debugLogVU = debug("AuthMiddleware:verifiedUser");
+const debugLogCT = debug("AuthMiddleware:checkToken");
 
 export async function verifiedUser(req: IRequest, res: Response, next: NextFunction) {
     try {
@@ -11,7 +15,8 @@ export async function verifiedUser(req: IRequest, res: Response, next: NextFunct
         next();
 
     } catch (err) {
-        return res.status(403).render("notLoggedIn", {
+        debugLogVU(err.message);
+        return res.status(403).render("auth/notLoggedIn", {
             layout: "unverified"
         });
     }
@@ -24,6 +29,7 @@ export async function checkToken(req: IRequest, res: Response, next: NextFunctio
         next();
 
     } catch (err) {
+        debugLogCT(err.message);
         next();
     }
 }

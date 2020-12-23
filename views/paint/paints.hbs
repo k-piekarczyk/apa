@@ -1,0 +1,13 @@
+<div class="container">
+    <h1>Paints</h1>
+    <a class="btn btn-primary" href="/paint/add">Add paint</a>
+    <ul class="list-group mt-2">
+        {{#each paints as |paint|}}
+        <li class="list-group-item"><span class="font-weight-bold">{{paint.name}}</span> {{paint.type}} {{#unless
+            paint.owned}}
+            <a href="/paint/{{paint.id}}/collection/add" data-toggle="tooltip" data-placement="right"
+                title="Add to your collection">➕</a> {{/unless}}
+        </li>
+        {{/each}}
+    </ul>
+</div>

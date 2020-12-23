@@ -1,0 +1,9 @@
+<div class="container">
+    <h1>Schemes</h1>
+    <a class="btn btn-primary" href="/paint/scheme/add">Add a scheme</a>
+    <ul class="list-group mt-2">
+        {{#each schemes as |scheme|}}
+            <li class="list-group-item"><a href="/paint/scheme/{{scheme.id}}">{{scheme.name}}</a></li>
+        {{/each}}
+    </ul>
+</div>

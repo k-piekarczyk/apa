@@ -1,0 +1,8 @@
+<div class="container">
+    <h2 class="mt-3">Paint list for <a href="/army/{{army.id}}">{{army.name}}</a></h2>
+    <ul class="list-group mt-2">
+        {{#each paintSet as |paint|}}
+        <li class="list-group-item"><span class="font-weight-bold">{{paint.name}}</span> {{paint.type}}</li>
+        {{/each}}
+    </ul>
+</div>

@@ -1,0 +1,13 @@
+<div class="container">
+    <h1>Your collection</h1>
+    <ul class="list-group">
+        {{#each paints as |paint|}}
+        <li class="list-group-item">
+            <span class="font-weight-bold">{{paint.name}}</span>
+            {{paint.type}}
+            <a href="/paint/{{paint.id}}/collection/remove" data-toggle="tooltip" data-placement="right"
+                title="Remove from your collection">➖</a>
+        </li>
+        {{/each}}
+    </ul>
+</div>

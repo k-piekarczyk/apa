@@ -1,2 +1,2 @@
-# APA Server
-A server for my Army Painter Assistant aplication. More information later.
+# APA
+The APA (Army Painter Assistant) application with server-side rendering
